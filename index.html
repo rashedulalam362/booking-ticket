@@ -53,28 +53,28 @@
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label id="fare_total" for="">First Class ($10)</label>
+                    <label id="firstClassTotaL_fare" for="">First Class ($10)</label>
                    
-                           <input id="fare_count" type="text" class="form-control text-center" value="0">
+                    <input id="firstClassFare_count" type="text" class="form-control text-center" value="0">
                          
                 </div>
                 <div class="plus-minus-btn">
                     
-                <button id="fare_decrease"  class="btn btn-success"><i class="fas fa-minus"></i></button>
-                <button id="fare_increase"  class="btn btn-success"><i class="fas fa-plus"></i></button>
+                <button onclick="handleSearchFare( false)"   class="btn btn-success"><i class="fas fa-minus"></i></button>
+                <button onclick="handleSearchFare( true)" class="btn btn-success"><i class="fas fa-plus"></i></button>
             </div>
             </div>
             
             <div class="input-group f-class">
                 <div>
-                    <label  for="">Economy ($100)</label>
-                    <input id="phone_count" type="text" class="form-control text-center" value="0">
+                    <label id="economyClassTotaL_fare" for="">Economy ($100)</label>
+                    <input id="economyClassFare_count" type="text" class="form-control text-center" value="0">
                 </div>
                 <div class="plus-minus-btn">
                     <div class="plus-minus-btn">
                     
-                        <button  class="btn btn-danger"><i class="fas fa-minus"></i></button>
-                        <button  class="btn btn-danger"><i class="fas fa-plus"></i></button>
+                        <button onclick="handleSearchFare2(false)"   class="btn btn-danger"><i class="fas fa-minus"></i></button>
+                        <button onclick="handleSearchFare2(true)"  class="btn btn-danger"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="total_fare">  $500</p>
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button onclick="alert('Thank you for your  booking')" class="btn-style">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -119,66 +119,65 @@
 
     <script>
 
-//   document.getElementById("case_Increase").addEventListener('click',()=>{
-//          handleProductClick(true)}) 
 
-//       document.getElementById("case_decrease").addEventListener('click',()=>{
-       
-//          handleProductClick(false) 
-//       })
 
-//      function handleProductClick(isIncrease){
 
-//        const caseInput=document.getElementById('case_count').value;
-//        const caseCount=parseInt(caseInput)
-//       //  const caseNewCount=caseCount-1;
-//        let caseNewCount=0;
-//        if (isIncrease==true){
-//          caseNewCount=caseCount+1;
-//        }
-//        if (isIncrease==false && caseCount>0){
-//          caseNewCount=caseCount-1;
-//        }
- 
-//        document.getElementById('case_count').value=caseNewCount;
-//        const caseTotal=caseNewCount*59;
-//        document.getElementById("case_total").innerText= '$' +caseTotal;
-
-//  }
 
   
-//     document.getElementById("fare_Increase").addEventListener("click",()=>{
-      
-//     handleSearchFare(true)})
-  
-
-//     document.getElementById("fare_decrease").addEventListener("click",()=>{
-        
-//     handleSearchFare(false) 
-       
-// })
-
-// function handleSearchFare(isIncrease){
-// const fareInput=document.getElementById("fare_count").value;
-// const fareCount=parseInt(fareInput);
-// // const fareNewCount=fareCount-1;
-// let fareNewCount=fareCount;
-// if(isIncrease==true){
-//     fareNewCount=fareCount+1
-// }
-// if (isIncrease==false && fareCount>0){
-//     fareNewCount=fareNewCount-1;
-// }
-
-// document.getElementById('fare_count').value=fareNewCount;
-// const fareTotal=fareNewCount*10;
-// document.getElementById("fare_total").innerText="$" +fareTotal;
-
-// }
 
 
+function handleSearchFare2(isIncrease){
+const fareInput=document.getElementById("economyClassFare_count").value
+console.log(fareInput);
+const fareCount=parseInt(fareInput);
+// const fareNewCount=fareCount-1;
+let fareNewCount=fareCount;
+if(isIncrease==true){
+    fareNewCount=fareCount+1
+}
+if (isIncrease==false && fareCount>0){
+    fareNewCount=fareNewCount-1;
+}
+
+document.getElementById('economyClassFare_count').value=fareNewCount;
+const fareTotal=fareNewCount*100;
+document.getElementById("economyClassTotaL_fare").innerText="$" +fareTotal;
+
+}
 
 
+function handleSearchFare(isIncrease){
+const fareInput=document.getElementById("firstClassFare_count").value;
+
+const fareCount=parseInt(fareInput);
+// const fareNewCount=fareCount-1;
+let fareNewCount=fareCount;
+if(isIncrease==true){
+    fareNewCount=fareCount+1
+}
+if (isIncrease==false && fareCount>0){
+    fareNewCount=fareNewCount-1;
+}
+
+document.getElementById('firstClassFare_count').value=fareNewCount;
+const fareTotal=fareNewCount*10;
+document.getElementById("firstClassTotaL_fare").innerText="$" +fareTotal;
+calculateTotal()
+}
+
+
+
+function calculateTotal(){
+const firstClassfareInput=document.getElementById("firstClassFare_count").value
+const firstClassfareCount=parseInt(firstClassfareInput)
+
+const economyClassFareInput=document.getElementById("economyClassFare_count").value;
+const  economyClassFareCount=parseInt(economyClassFareInput)
+
+const TotalFare=firstClassfareCount*10 +economyClassFareCount*100
+document.getElementById('total_fare').innerText='$' +TotalFare;
+
+}
 
 
 
@@ -192,27 +191,27 @@
 
 //manual system
 
-   document.getElementById("fare_increase").addEventListener("click",()=>{
-   const fareInput=document.getElementById("fare_count").value;
-   const fareCount=parseInt(fareInput);
-   const fareNewCount=fareCount+1;
+//    document.getElementById("firstClassEconomyFare_increase").addEventListener("click",()=>{
+//    const fareInput=document.getElementById("firstClassFare_count").value;
+//    const fareCount=parseInt(fareInput);
+//    const fareNewCount=fareCount+1;
 
-   document.getElementById("fare_count").value=fareNewCount;
-   const fareTotal=fareNewCount*10;
-   document.getElementById("fare_total").innerText="$" +fareTotal;
+//    document.getElementById("firstClassFare_count").value=fareNewCount;
+//    const fareTotal=fareNewCount*10;
+//    document.getElementById("firstClassTotaL_fare").innerText="$" +fareTotal;
 
-   })
+//    })
 
-   document.getElementById("fare_decrease").addEventListener("click",()=>{
-   const fareInput=document.getElementById("fare_count").value;
-   const fareCount=parseInt(fareInput);
-   const fareNewCount=fareCount-1;
+//    document.getElementById("firstClassEconomyFare_decrease").addEventListener("click",()=>{
+//    const fareInput=document.getElementById("firstClassFare_count").value;
+//    const fareCount=parseInt(fareInput);
+//    const fareNewCount=fareCount-1;
 
-   document.getElementById("fare_count").value=fareNewCount;
-   const fareTotal=fareNewCount*10;
-   document.getElementById("fare_total").innerText="$" +fareTotal;
+//    document.getElementById("firstClassFare_count").value=fareNewCount;
+//    const fareTotal=fareNewCount*10;
+//    document.getElementById("firstClassTotaL_fare").innerText="$" +fareTotal;
 
-   })
+//    })
 
 
 
