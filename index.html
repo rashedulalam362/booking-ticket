@@ -60,21 +60,21 @@
                 </div>
                 <div class="plus-minus-btn">
                     
-                <button onclick="handleSearchFare( false)"   class="btn btn-success"><i class="fas fa-minus"></i></button>
-                <button onclick="handleSearchFare( true)" class="btn btn-success"><i class="fas fa-plus"></i></button>
+                <button onclick="handleFirstClassFare( false)"   class="btn btn-success"><i class="fas fa-minus"></i></button>
+                <button onclick="handleFirstClassFare( true)" class="btn btn-success"><i class="fas fa-plus"></i></button>
             </div>
             </div>
             
             <div class="input-group f-class">
                 <div>
                     <label id="economyClassTotaL_fare" for="">Economy ($100)</label>
-                    <input id="economyClassFare_count" type="text" class="form-control text-center" value="0">
+                    <input  id="economyClassFare_count" type="text" class="form-control text-center" value="0">
                 </div>
                 <div class="plus-minus-btn">
                     <div class="plus-minus-btn">
                     
-                        <button onclick="handleSearchFare2(false)"   class="btn btn-danger"><i class="fas fa-minus"></i></button>
-                        <button onclick="handleSearchFare2(true)"  class="btn btn-danger"><i class="fas fa-plus"></i></button>
+                        <button onclick="handleEconomyClassFare(false)"   class="btn btn-danger"><i class="fas fa-minus"></i></button>
+                        <button onclick="handleEconomyClassFare(true)"  class="btn btn-danger"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p id="total_fare">  $500</p>
+                        <h5 id="total_fare">$500</h5>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p >$50</p>
+                        <p id="tax_amount">$50</p>
                     </div>
                 </div>
                 <hr>
@@ -102,7 +102,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id=grand_total>$550</p>
                     </div>
                 </div>
             </div>
@@ -126,9 +126,9 @@
   
 
 
-function handleSearchFare2(isIncrease){
+function handleEconomyClassFare(isIncrease){
 const fareInput=document.getElementById("economyClassFare_count").value
-console.log(fareInput);
+
 const fareCount=parseInt(fareInput);
 // const fareNewCount=fareCount-1;
 let fareNewCount=fareCount;
@@ -142,11 +142,12 @@ if (isIncrease==false && fareCount>0){
 document.getElementById('economyClassFare_count').value=fareNewCount;
 const fareTotal=fareNewCount*100;
 document.getElementById("economyClassTotaL_fare").innerText="$" +fareTotal;
+calculateTotal()
 
 }
 
 
-function handleSearchFare(isIncrease){
+function handleFirstClassFare(isIncrease){
 const fareInput=document.getElementById("firstClassFare_count").value;
 
 const fareCount=parseInt(fareInput);
@@ -163,22 +164,31 @@ document.getElementById('firstClassFare_count').value=fareNewCount;
 const fareTotal=fareNewCount*10;
 document.getElementById("firstClassTotaL_fare").innerText="$" +fareTotal;
 calculateTotal()
+
 }
+
 
 
 
 function calculateTotal(){
 const firstClassfareInput=document.getElementById("firstClassFare_count").value
+
 const firstClassfareCount=parseInt(firstClassfareInput)
 
-const economyClassFareInput=document.getElementById("economyClassFare_count").value;
+const economyClassFareInput=document.getElementById("economyClassFare_count").value
+
 const  economyClassFareCount=parseInt(economyClassFareInput)
 
-const TotalFare=firstClassfareCount*10 +economyClassFareCount*100
-document.getElementById('total_fare').innerText='$' +TotalFare;
+const TotalFare=firstClassfareCount* 10 +economyClassFareCount *100;
+document.getElementById("total_fare").innerText ='$'+TotalFare;
+const tax=TotalFare *0.1;
+document.getElementById("tax_amount").innerText='$'+ tax;
+
+const grossTotal=TotalFare +tax
+
+document.getElementById("grand_total").innerText='$'+grossTotal;
 
 }
-
 
 
 
